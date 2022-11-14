@@ -30,6 +30,9 @@ class MailCheckProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mail-check');
         if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/mail-check'),
+            ], 'views');
             $this->commands([
                 MailCheckCommand::class,
             ]);

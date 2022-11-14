@@ -12,6 +12,14 @@ composer require ilhanaydinli/laravel-mail-check
 
 The package will automatically register itself.
 
+#### View
+
+If you want to configure the mail to be sent, you can publish the view.
+
+```bash
+php artisan vendor:publish --provider="IlhanAydinli\LaravelMailCheck\MailCheckProvider" --tag="views"
+```
+
 ## Usage
 
 ```bash
