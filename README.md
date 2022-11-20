@@ -1,6 +1,6 @@
 # Laravel Mail Check
 
-Check sending email using Laravel's mail settings.
+Check sending email using Laravel mail settings.
 
 ## Installation
 
@@ -25,7 +25,7 @@ php artisan vendor:publish --provider="IlhanAydinli\LaravelMailCheck\MailCheckPr
 ```bash
   mail-check:all                        Do all the checks.
   mail-check:config                     Checks Laravel mail settings.
-  mail-check:mail                       Check sending email using Laravel's mail settings.
+  mail-check:mail                       Check sending email using Laravel mail settings.
   mail-check:spf                        Checks whether it can send mail on behalf of the e-mail address.
 ```
 

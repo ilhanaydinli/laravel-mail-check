@@ -23,7 +23,7 @@ class MailCheckCommand extends BaseCommand
      *
      * @var string
      */
-    protected $description = "Check sending email using Laravel's mail settings.";
+    protected $description = "Check sending email using Laravel mail settings.";
 
     /**
      * Execute the console command.
