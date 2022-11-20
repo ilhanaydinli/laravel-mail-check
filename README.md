@@ -20,32 +20,46 @@ If you want to configure the mail to be sent, you can publish the view.
 php artisan vendor:publish --provider="IlhanAydinli\LaravelMailCheck\MailCheckProvider" --tag="views"
 ```
 
-## Usage
+## Commands
 
 ```bash
-php artisan mail:check
+  mail-check:all                        Do all the checks.
+  mail-check:config                     Checks Laravel mail settings.
+  mail-check:mail                       Check sending email using Laravel's mail settings.
+  mail-check:spf                        Checks whether it can send mail on behalf of the e-mail address.
+```
+
+## Example Usage
+
+```bash
+php artisan mail-check:all
 ```
 
 #### Successful Result
 
 ```bash
 $ php artisan mail:check
+
+What is the e-mail address you want to send test mail to?:
+> test@test.com
+
+**********************************************
+*     Please Wait - Mail Config Checking     *
+**********************************************
+
+Mail settings are successful.
+
+**************************************
+*     Please Wait - SPF Checking     *
+**************************************
+
+You can send an e-mail on behalf of test@test.com.
+
 ****************************************
 *     Please Wait - E-Mail Sending     *
 ****************************************
 
 E-mail sending was successful.
-```
-
-#### Unsuccessful Result
-
-```bash
-$ php artisan mail:check
-****************************************
-*     Please Wait - E-Mail Sending     *
-****************************************
-
-Failed to authenticate on SMTP server with username "---" using the following authenticators: "CRAM-MD5", "LOGIN", "PLAIN". Authenticator "CRAM-MD5" returned "Expected response code "235" but got code "535", with message "535 5.7.0 Invalid login or password".". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 5.7.0 Invalid login or password".". Authenticator "PLAIN" returned "Expected response code "235" but got empty code.".
 ```
 
 ## License

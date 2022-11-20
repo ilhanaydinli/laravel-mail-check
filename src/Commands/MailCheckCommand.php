@@ -5,15 +5,18 @@ namespace IlhanAydinli\LaravelMailCheck\Commands;
 use Throwable;
 use Illuminate\Console\Command;
 use IlhanAydinli\LaravelMailCheck\Facade\MailCheck;
+use IlhanAydinli\LaravelMailCheck\Commands\BaseCommand;
 
-class MailCheckCommand extends Command
+class MailCheckCommand extends BaseCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'mail:check';
+    protected $signature = 'mail-check:mail
+                            {email? : The e-mail address to which the test mail will be sent.}
+                            ';
 
     /**
      * The console command description.
@@ -29,9 +32,11 @@ class MailCheckCommand extends Command
      */
     public function handle()
     {
+        $email = $this->emailValidation('mail-check:mail');
+
         try {
             $this->alert("Please Wait - E-Mail Sending");
-            MailCheck::sendMail();
+            MailCheck::send($email);
             $this->info("E-mail sending was successful.");
 
             return Command::SUCCESS;

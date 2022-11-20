@@ -2,9 +2,12 @@
 
 namespace IlhanAydinli\LaravelMailCheck;
 
+use IlhanAydinli\LaravelMailCheck\Commands\AllCheckCommand;
+use IlhanAydinli\LaravelMailCheck\Commands\ConfigCheckCommand;
 use Illuminate\Support\ServiceProvider;
 use IlhanAydinli\LaravelMailCheck\MailCheck;
 use IlhanAydinli\LaravelMailCheck\Commands\MailCheckCommand;
+use IlhanAydinli\LaravelMailCheck\Commands\SpfCheckCommand;
 
 class MailCheckProvider extends ServiceProvider
 {
@@ -34,6 +37,9 @@ class MailCheckProvider extends ServiceProvider
                 __DIR__ . '/../resources/views' => resource_path('views/vendor/mail-check'),
             ], 'views');
             $this->commands([
+                AllCheckCommand::class,
+                ConfigCheckCommand::class,
+                SpfCheckCommand::class,
                 MailCheckCommand::class,
             ]);
         }

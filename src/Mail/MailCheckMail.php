@@ -32,7 +32,7 @@ class MailCheckMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Mail Check Mail',
+            subject: 'Test Mail',
         );
     }
 
@@ -44,7 +44,7 @@ class MailCheckMail extends Mailable
     public function content()
     {
         return new Content(
-            view: MailCheck::VIEWS . '::mail',
+            view: MailCheck::VIEWS . '::mail.test-mail',
         );
     }
 
@@ -56,5 +56,10 @@ class MailCheckMail extends Mailable
     public function attachments()
     {
         return [];
+    }
+
+    public function build()
+    {
+        return $this->markdown(MailCheck::VIEWS . '::mail.test-mail');
     }
 }
