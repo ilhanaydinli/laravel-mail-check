@@ -38,7 +38,7 @@ php artisan mail-check:all
 #### Successful Result
 
 ```bash
-$ php artisan mail:check
+$ php artisan mail-check:all
 
 What is the e-mail address you want to send test mail to?:
 > test@test.com
