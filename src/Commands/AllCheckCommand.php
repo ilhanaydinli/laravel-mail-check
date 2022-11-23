@@ -12,7 +12,8 @@ class AllCheckCommand extends BaseCommand
      * @var string
      */
     protected $signature = 'mail-check:all
-                            {email? : For all mail checks.}
+                            {from-email? : The email that sent the mail.}
+                            {to-email? : The email that receives the mail.}
                             ';
 
     /**
@@ -29,16 +30,17 @@ class AllCheckCommand extends BaseCommand
      */
     public function handle()
     {
-        $email = $this->emailValidation('mail-check:all');
+        $emails = $this->emailValidation('mail-check:all');
 
         $this->call('mail-check:config');
         $this->newLine();
         $this->call('mail-check:spf', [
-            'email' => $email
+            'from-email' => $emails['fromEmail']
         ]);
         $this->newLine();
         $this->call('mail-check:mail', [
-            'email' => $email
+            'from-email' => $emails['fromEmail'],
+            'to-email' => $emails['toEmail']
         ]);
     }
 }

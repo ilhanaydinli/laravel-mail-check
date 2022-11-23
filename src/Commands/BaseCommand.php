@@ -7,18 +7,35 @@ use Illuminate\Support\Facades\Validator;
 
 class BaseCommand extends Command
 {
-    public function emailValidation($retryCommand)
+    public function emailValidation($retryCommand, $includeTo = true)
     {
-        $email = $this->argument('email');
-        if (!$email) {
-            $email = $this->ask(
-                'What is the e-mail address you want to send test mail to?'
+        $fromEmail = $this->argument('from-email');
+
+        if (!$fromEmail) {
+            $fromEmail = $this->ask(
+                'From which email address do you want to send mail?',
+                config('mail.from.address')
             );
         }
+
+        $toEmailRequired = 'nullable';
+        $toEmail = null;
+        if ($includeTo == true) {
+            $toEmail = $this->argument('to-email');
+            if (!$toEmail) {
+                $toEmail = $this->ask(
+                    'To which email address do you want to send mail?'
+                );
+            }
+            $toEmailRequired = 'required';
+        }
+
         $validator = Validator::make([
-            'email' => $email,
+            'fromEmail' => $fromEmail,
+            'toEmail' => $toEmail,
         ], [
-            'email' => ['required', 'email'],
+            'fromEmail' => ['required', 'email'],
+            'toEmail' => [$toEmailRequired, 'email'],
         ]);
 
         if ($validator->fails()) {
@@ -28,6 +45,6 @@ class BaseCommand extends Command
             return $this->call($retryCommand);
         }
 
-        return $email;
+        return compact('fromEmail', 'toEmail');
     }
 }

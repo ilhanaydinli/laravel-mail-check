@@ -10,9 +10,11 @@ class MailCheck
 {
     public const VIEWS = 'mail-check';
 
-    public function send($email)
+    public function send($emails)
     {
-        Mail::to($email)->send(new MailCheckMail());
+        Mail::to($emails['toEmail'])->send(
+            new MailCheckMail($emails['fromEmail'])
+        );
     }
 
     public function checkConfig()

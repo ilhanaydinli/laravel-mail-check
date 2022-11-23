@@ -15,7 +15,8 @@ class MailCheckCommand extends BaseCommand
      * @var string
      */
     protected $signature = 'mail-check:mail
-                            {email? : The e-mail address to which the test mail will be sent.}
+                            {from-email? : The email that sent the mail.}
+                            {to-email? : The email that receives the mail.}
                             ';
 
     /**
@@ -32,11 +33,11 @@ class MailCheckCommand extends BaseCommand
      */
     public function handle()
     {
-        $email = $this->emailValidation('mail-check:mail');
+        $emails = $this->emailValidation('mail-check:mail');
 
         try {
             $this->alert("Please Wait - E-Mail Sending");
-            MailCheck::send($email);
+            MailCheck::send($emails);
             $this->info("E-mail sending was successful.");
 
             return Command::SUCCESS;

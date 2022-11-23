@@ -14,7 +14,7 @@ class SpfCheckCommand extends BaseCommand
      * @var string
      */
     protected $signature = 'mail-check:spf
-                            {email? : E-mail address to check.}
+                            {from-email? : The email that sent the mail.}
                             ';
 
     /**
@@ -31,10 +31,10 @@ class SpfCheckCommand extends BaseCommand
      */
     public function handle()
     {
-        $email = $this->emailValidation('mail-check:spf');
+        $emails = $this->emailValidation('mail-check:spf', false);
 
         $this->alert("Please Wait - SPF Checking");
-        $checkServer = MailCheck::checkSpf($email);
+        $checkServer = MailCheck::checkSpf($emails['fromEmail']);
         if ($checkServer['status'] == true) {
             $this->info($checkServer['msg']);
             return Command::SUCCESS;

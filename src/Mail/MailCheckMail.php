@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use IlhanAydinli\LaravelMailCheck\MailCheck;
+use Illuminate\Mail\Mailables\Address;
 
 class MailCheckMail extends Mailable
 {
@@ -19,9 +20,12 @@ class MailCheckMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    protected $fromEmail;
+
+    public function __construct($fromEmail)
     {
-        //
+        $this->fromEmail = $fromEmail;
     }
 
     /**
@@ -32,6 +36,7 @@ class MailCheckMail extends Mailable
     public function envelope()
     {
         return new Envelope(
+            from: new Address($this->fromEmail, 'Test User'),
             subject: 'Test Mail',
         );
     }
