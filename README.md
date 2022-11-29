@@ -40,8 +40,11 @@ php artisan mail-check:all
 ```bash
 $ php artisan mail-check:all
 
-What is the e-mail address you want to send test mail to?:
-> test@test.com
+From which email address do you want to send mail? [from@test.com]:
+>
+
+To which email address do you want to send mail?:
+> to@test.com
 
 **********************************************
 *     Please Wait - Mail Config Checking     *
